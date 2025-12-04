@@ -1,17 +1,30 @@
 package model;
 
-public class Magic {
-    String name;
-    EffectType type;
-    int value;
-    int manaCost;
+public abstract class Magic {
+    protected String name;
+    protected EffectType type;
+    protected int value;
+    protected int manaCost;
+
     public Magic(String name, EffectType type, int value, int manaCost) {
         this.name = name;
         this.type = type;
         this.value = value;
         this.manaCost = manaCost;
     }
-    public int getValue() {
-        return value;
+
+    public String getName() { return name; }
+    public EffectType getType() { return type; }
+    public int getValue() { return value; }
+    public int getManaCost() { return manaCost; }
+
+    public boolean isEnoughMana(Magician magician) {
+        return magician.getMana() >= manaCost;
     }
+
+    public void tellMagicUser(Magician magician) {
+        System.out.println(magician.getName() + " naudoja " + getName());
+    }
+
+    public abstract void performMagic(Magician caster, Magician target);
 }
