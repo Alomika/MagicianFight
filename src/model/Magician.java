@@ -8,7 +8,7 @@ public class Magician {
     private String name;
     private int health = 20;
     private int mana = 50;
-    public List<Magic> spellBook;
+    protected List<Magic> spellBook;
     private boolean isShielded = false;
 
     public Magician(String name, List<Magic> spellBook) {

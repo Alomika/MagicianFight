@@ -14,8 +14,6 @@ public abstract class Magic {
     }
 
     public String getName() { return name; }
-    public EffectType getType() { return type; }
-    public int getValue() { return value; }
     public int getManaCost() { return manaCost; }
 
     public boolean isEnoughMana(Magician magician) {

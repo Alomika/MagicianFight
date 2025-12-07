@@ -6,12 +6,8 @@ import java.util.concurrent.TimeUnit;
 public class Game {
     private final Scanner scanner = new Scanner(System.in);
 
-    private final List<Magic> spells = Arrays.asList(
-            new DamageMagic("Ugnies Kamuolys", 10, 10),
-            new HealMagic("Gydymo Aura", 15, 8),
-            new ShieldMagic("Apsaugos Skydas", 6),
-            new ManaUserMagic("Manos vagis", 10)
-    );
+    private final List<Magic> spells = MagicFactory.createAllSpells();
+
 
     private HumanMagician player = new HumanMagician("GameLover#1", spells);
     private AIMagician ai = new AIMagician("AI", spells, new RandomAIStrategy());
