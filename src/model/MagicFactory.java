@@ -14,15 +14,19 @@ public class MagicFactory {
         spells.add(createMagic("MANA_USER", "Manos vagis", 0, 10));
         return spells;
     }
-    private static Magic createMagic(String type, String name, int baseValue, int baseMana) {
-        int value = 5 + baseValue + random.nextInt(5);
-        int manaCost = 5 + baseMana + random.nextInt(3);
-        return switch (type) {
-            case "DAMAGE" -> new DamageMagic(name, value, manaCost);
-            case "HEAL" -> new HealMagic(name, value, manaCost);
-            case "SHIELD" -> new ShieldMagic(name, manaCost);
-            case "MANA_USER" -> new ManaUserMagic(name, manaCost);
-            default -> throw new IllegalArgumentException("Nežinomas burtas: " + type);
-        };
+    private static Magic createMagic(String type, String name, int value, int manaCost) {
+        switch (type) {
+            case "DAMAGE":
+                return new DamageMagic(name, value, manaCost);
+            case "HEAL":
+                return new HealMagic(name, value, manaCost);
+            case "SHIELD":
+                return new ShieldMagic(name, manaCost);
+            case "MANA_USER":
+                return new ManaUserMagic(name, manaCost);
+            default:
+                throw new IllegalArgumentException("Nežinomas burto tipas: " + type);
+        }
     }
+
 }

@@ -1,0 +1,126 @@
+package test;
+
+import model.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class GameLogicTest {
+
+    private Magician player;
+    private Magician enemy;
+
+    private Magic dmg;
+    private Magic heal;
+    private Magic shield;
+    private Magic manaSteal;
+
+    @BeforeEach
+    void setUp() {
+        dmg = new DamageMagic("Fireball", 10, 5);
+        heal = new HealMagic("Heal", 10, 5);
+        shield = new ShieldMagic("Shield", 5);
+        manaSteal = new ManaUserMagic("Mana Steal", 5);
+
+        List<Magic> spells = Arrays.asList(dmg, heal, shield, manaSteal);
+
+        player = new HumanMagician("Player", spells);
+        enemy = new HumanMagician("Enemy", spells);
+    }
+
+
+    @Test
+    void damageReducesHealth() {
+        int before = enemy.getHealth();
+        enemy.takeDamage(7);
+        assertEquals(before - 7, enemy.getHealth());
+    }
+
+    @Test
+    void damageSpellReducesHealth() {
+        int before = enemy.getHealth();
+        player.applySpell(dmg, player, enemy);
+        assertEquals(before - 10, enemy.getHealth());
+    }
+
+    @Test
+    void damageIsBlockedByShield() {
+        enemy.setShield(true);
+        player.applySpell(dmg, player, enemy);
+        assertEquals(20, enemy.getHealth());
+        assertFalse(enemy.getShield());
+    }
+
+    @Test
+    void healRestoresHealth() {
+        player.takeDamage(10);
+        player.applySpell(heal, player, enemy);
+        assertEquals(20, player.getHealth());
+    }
+
+    @Test
+    void healCannotExceedMax() {
+        player.applySpell(heal, player, enemy);
+        assertEquals(20, player.getHealth());
+    }
+
+    @Test
+    void spellConsumesMana() {
+        int before = player.getMana();
+        player.applySpell(dmg, player, enemy);
+        assertEquals(before - dmg.getManaCost(), player.getMana());
+    }
+
+    @Test
+    void insufficientManaPreventsCasting() {
+        player.useAllMana();
+        player.applySpell(dmg, player, enemy);
+        assertEquals(0, player.getMana());
+        assertEquals(20, enemy.getHealth());
+    }
+
+    @Test
+    void manaStealRemovesAllMana() {
+        enemy.useMana(20);
+        enemy.applySpell(manaSteal, enemy, player);
+        assertEquals(0, player.getMana());
+    }
+
+    @Test
+    void shieldActivates() {
+        player.applySpell(shield, player, enemy);
+        assertTrue(player.getShield());
+    }
+
+    @Test
+    void shieldRemovedAfterHit() {
+        player.applySpell(shield, player, enemy);
+        enemy.applySpell(dmg, enemy, player);
+        assertFalse(player.getShield());
+    }
+
+    @Test
+    void manaRegenerates() {
+        player.useMana(20);
+        player.regenMana();
+        assertEquals(35, player.getMana());
+    }
+
+    @Test
+    void regenDoesNotExceedMaxMana() {
+        player.regenMana();
+        assertEquals(50, player.getMana());
+    }
+
+    @Test
+    void aiStrategyNeverReturnsNullIfManaEnough() {
+        AIMagician ai = new AIMagician("AI", Arrays.asList(dmg, heal), (a, t) -> dmg);
+        Magic chosen = ai.pickMagic(player);
+        assertNotNull(chosen);
+    }
+}
+//Paleisti testus: java -jar lib/junit-platform-console-standalone-1.10.0.jar -cp out --scan-classpath
