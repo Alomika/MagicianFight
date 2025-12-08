@@ -47,7 +47,7 @@ public class Game {
     }
 
     private void aiTurn() {
-        Magic spell = ai.pickMagic(player);
+        Magic spell = ai.pickMagic();
         ai.applySpell(spell, ai, player);
     }
 

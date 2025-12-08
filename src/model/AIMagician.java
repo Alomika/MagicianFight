@@ -10,7 +10,7 @@ public class AIMagician extends Magician {
         this.strategy = strategy;
     }
 
-    public Magic pickMagic(Magician target) {
+    public Magic pickMagic() {
         return strategy.chooseSpell(this);
     }
 }
