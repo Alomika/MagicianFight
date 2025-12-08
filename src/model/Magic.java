@@ -13,16 +13,16 @@ public abstract class Magic {
         this.manaCost = manaCost;
     }
 
-    public String getName() { return name; }
+    protected String getName() { return name; }
     public int getManaCost() { return manaCost; }
 
-    public boolean isEnoughMana(Magician magician) {
+    protected boolean isEnoughMana(Magician magician) {
         return magician.getMana() >= manaCost;
     }
 
-    public void tellMagicUser(Magician magician) {
+    protected void tellMagicUser(Magician magician) {
         FeedbackGiver.giveFeedback(magician.getName() + " naudoja " + getName());
     }
 
-    public abstract void performMagic(Magician caster, Magician target);
+    protected abstract void performMagic(Magician caster, Magician target);
 }

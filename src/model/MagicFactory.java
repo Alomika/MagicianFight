@@ -2,14 +2,11 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 import static model.Constants.*;
 
 public class MagicFactory {
-    private static final Random random = new Random();
-    public static List<Magic> createAllSpells() {
+    protected static List<Magic> createAllSpells() {
         List<Magic> spells = new ArrayList<>();
         spells.add(createMagic("DAMAGE", "Ugnies Kamuolys", RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, HEALTH), RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, MANA/DIVIDER)));
         spells.add(createMagic("HEAL", "Gydymo Aura", RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, HEALTH), RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, MANA/DIVIDER)));
