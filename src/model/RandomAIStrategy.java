@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 class RandomAIStrategy implements AIStrategy {
     @Override
-    public Magic chooseSpell(AIMagician ai, Magician target) {
+    public Magic chooseSpell(AIMagician ai) {
         List<Magic> affordableSpells = ai.spellBook.stream()
                 .filter(s -> s.isEnoughMana(ai))
                 .collect(Collectors.toList());

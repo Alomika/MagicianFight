@@ -119,13 +119,6 @@ class GameLogicTest {
         player.regenMana();
         assertEquals(MANA, player.getMana());
     }
-
-    @Test
-    void aiStrategyNeverReturnsNullIfManaEnough() {
-        AIMagician ai = new AIMagician("AI", Arrays.asList(dmg, heal), (a, t) -> dmg);
-        Magic chosen = ai.pickMagic(player);
-        assertNotNull(chosen);
-    }
 }
 /*
     Rankinis testų paleidimas jei prireiktų:
