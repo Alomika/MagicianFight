@@ -3,7 +3,7 @@ package model;
 import java.util.List;
 
 public class AIMagician extends Magician {
-    private AIStrategy strategy;
+    private final AIStrategy strategy;
 
     public AIMagician(String name, List<Magic> spellBook, AIStrategy strategy) {
         super(name, spellBook);

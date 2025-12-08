@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static model.Constants.ADD_MANA;
+import static model.Constants.MANA;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameLogicTest {
@@ -105,15 +107,17 @@ class GameLogicTest {
 
     @Test
     void manaRegenerates() {
+        int initialMana = player.getMana();
         player.useMana(20);
+        int expectedMana = initialMana - 20 + ADD_MANA;
         player.regenMana();
-        assertEquals(35, player.getMana());
+        assertEquals(expectedMana, player.getMana());
     }
 
     @Test
     void regenDoesNotExceedMaxMana() {
         player.regenMana();
-        assertEquals(50, player.getMana());
+        assertEquals(MANA, player.getMana());
     }
 
     @Test
@@ -123,4 +127,9 @@ class GameLogicTest {
         assertNotNull(chosen);
     }
 }
-//Paleisti testus: java -jar lib/junit-platform-console-standalone-1.10.0.jar -cp out --scan-classpath
+/*
+    Rankinis testų paleidimas jei prireiktų:
+        Pirma subuildinti: javac -d out -cp lib/junit-platform-console-standalone-1.10.0.jar src/model/*.java src/test/*.java
+        O tik po to: Paleisti testus: java -jar lib/junit-platform-console-standalone-1.10.0.jar -cp out --scan-classpath
+        Nors taip veikia ir tiesiog paleidus klasę.
+*/

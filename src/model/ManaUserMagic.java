@@ -1,9 +1,11 @@
 package model;
 
+import static model.Constants.MIN_NUMBER;
+
 public class ManaUserMagic extends Magic {
 
     public ManaUserMagic(String name, int manaCost) {
-        super(name, EffectType.MANA_USER, 0, manaCost);
+        super(name, EffectType.MANA_USER, MIN_NUMBER, manaCost);
     }
 
     @Override

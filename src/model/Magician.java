@@ -3,11 +3,12 @@ package model;
 import java.util.List;
 
 import static java.lang.Math.min;
+import static model.Constants.*;
 
 public class Magician {
     private String name;
-    private int health = 20;
-    private int mana = 50;
+    private int health = HEALTH;
+    private int mana = MANA;
     protected List<Magic> spellBook;
     private boolean isShielded = false;
 
@@ -22,14 +23,14 @@ public class Magician {
     public boolean getShield() { return isShielded; }
     public void setShield(boolean value) { isShielded = value; }
 
-    public void takeDamage(int value) { health = Math.max(0, health - value); }
-    public void heal(int value) { health = Math.min(20, health + value); }
-    public void useMana(int value) { mana = Math.max(0, mana - value); }
-    public void useAllMana() { mana = 0; }
+    public void takeDamage(int value) { health = Math.max(MIN_STAT, health - value); }
+    public void heal(int value) { health = Math.min(HEALTH, health + value); }
+    public void useMana(int value) { mana = Math.max(MIN_STAT, mana - value); }
+    public void useAllMana() { mana = MIN_STAT; }
 
-    public boolean isAlive() { return health > 0; }
+    public boolean isAlive() { return health > MIN_STAT; }
 
-    public void regenMana() { mana = min(50, mana + 5); }
+    public void regenMana() { mana = min(MANA, mana + ADD_MANA); }
 
     public void applySpell(Magic spell, Magician caster, Magician target) {
         if (spell == null) {

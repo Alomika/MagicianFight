@@ -9,11 +9,11 @@ public class Game {
     private final List<Magic> spells = MagicFactory.createAllSpells();
 
 
-    private HumanMagician player = new HumanMagician("GameLover#1", spells);
+    private HumanMagician player = new HumanMagician("Player", spells);
     private AIMagician ai = new AIMagician("AI", spells, new RandomAIStrategy());
 
     public void playGame() throws InterruptedException {
-        System.out.println("Welcome to the game!");
+        FeedbackGiver.giveFeedback("Welcome to the game!");
         TimeUnit.SECONDS.sleep(1);
 
         while (player.isAlive() && ai.isAlive()) {
@@ -52,7 +52,7 @@ public class Game {
     }
 
     private int readPlayerChoice() {
-        System.out.print("Tavo pasirinkimas: ");
+        FeedbackGiver.giveFeedback("Tavo pasirinkimas: ");
         return scanner.nextInt();
     }
 
@@ -62,22 +62,22 @@ public class Game {
 
     private void checkVictory() {
         if (!player.isAlive()) {
-            System.out.println(ai.getName() + " LAIMI");
+            FeedbackGiver.giveFeedback(ai.getName() + " LAIMI");
         } else if (!ai.isAlive()) {
-            System.out.println(player.getName() + " LAIMI");
+            FeedbackGiver.giveFeedback(player.getName() + " LAIMI");
         }
     }
 
     private void displayStats(Magician magician) {
-        System.out.println(magician.getName() + " turi " + magician.getHealth() + " gyvybių");
-        System.out.println(magician.getName() + " turi " + magician.getMana() + " manos");
+        FeedbackGiver.giveFeedback(magician.getName() + " turi " + magician.getHealth() + " gyvybių");
+        FeedbackGiver.giveFeedback(magician.getName() + " turi " + magician.getMana() + " manos");
     }
 
     private void showSpellList(HumanMagician player) {
-        System.out.println("\nPasirink savo burtą:");
+        FeedbackGiver.giveFeedback("\nPasirink savo burtą:");
         for (int i = 0; i < player.spellBook.size(); i++) {
             Magic s = player.spellBook.get(i);
-            System.out.print("[" + i + "] " + s.getName() + " kaina: " + s.getManaCost() + "\n");
+            FeedbackGiver.giveFeedback("[" + i + "] " + s.getName() + " kaina: " + s.getManaCost() + "\n");
         }
     }
 }

@@ -21,7 +21,7 @@ public abstract class Magic {
     }
 
     public void tellMagicUser(Magician magician) {
-        System.out.println(magician.getName() + " naudoja " + getName());
+        FeedbackGiver.giveFeedback(magician.getName() + " naudoja " + getName());
     }
 
     public abstract void performMagic(Magician caster, Magician target);
