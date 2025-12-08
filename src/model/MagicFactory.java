@@ -11,10 +11,10 @@ public class MagicFactory {
     private static final Random random = new Random();
     public static List<Magic> createAllSpells() {
         List<Magic> spells = new ArrayList<>();
-        spells.add(createMagic("DAMAGE", "Ugnies Kamuolys", RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, HEALTH), RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, MANA/2)));
-        spells.add(createMagic("HEAL", "Gydymo Aura", RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, HEALTH), RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, MANA/2)));
-        spells.add(createMagic("SHIELD", "Apsaugos Skydas", MIN_STAT, RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, MANA/2)));
-        spells.add(createMagic("MANA_USER", "Manos vagis", MIN_STAT, RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, MANA/2)));
+        spells.add(createMagic("DAMAGE", "Ugnies Kamuolys", RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, HEALTH), RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, MANA/DIVIDER)));
+        spells.add(createMagic("HEAL", "Gydymo Aura", RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, HEALTH), RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, MANA/DIVIDER)));
+        spells.add(createMagic("SHIELD", "Apsaugos Skydas", MIN_STAT, RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, MANA/DIVIDER)));
+        spells.add(createMagic("MANA_USER", "Manos vagis", MIN_STAT, RandomNumberGenerator.generateRandomNumber(MIN_NUMBER, MANA/DIVIDER)));
         return spells;
     }
     private static Magic createMagic(String type, String name, int value, int manaCost) {

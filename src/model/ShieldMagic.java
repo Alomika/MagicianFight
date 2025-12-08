@@ -1,12 +1,11 @@
 package model;
 
-
-import static model.Constants.MIN_NUMBER;
+import static model.Constants.MIN_STAT;
 
 public class ShieldMagic extends Magic {
 
     public ShieldMagic(String name, int manaCost) {
-        super(name, EffectType.SHIELD, MIN_NUMBER, manaCost);
+        super(name, EffectType.SHIELD, MIN_STAT, manaCost);
     }
 
     @Override
